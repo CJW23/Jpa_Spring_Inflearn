@@ -26,11 +26,16 @@ public class Category {
 
     //상위 카테고리
     //많은 카테고리가 하나의 하위 카테고리가 될 수 있다.
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
     private Category parent;
 
     @OneToMany(mappedBy = "parent")
     private List<Category> child = new ArrayList<>();
+
+    public void addChildCategory(Category child){
+        this.child.add(child);
+        child.setParent(this);
+    }
 }
 
