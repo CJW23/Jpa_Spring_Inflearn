@@ -12,7 +12,6 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class MemberRepository {
-
     //스프링이 EntityManager를 생성해서 em에 주입
     //@PersistenceContext
     // @Autowired //부트에서 가능
@@ -27,10 +26,8 @@ public class MemberRepository {
     }
 
     public List<Member> findAll() {
-        List<Member> result = em.createQuery("select m from Member m", Member.class)
+        return em.createQuery("select m from Member m", Member.class)
                 .getResultList();
-
-        return result;
     }
 
     public List<Member> findByName(String name){
