@@ -7,7 +7,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 public class OrderItem {
 	@Id
 	@GeneratedValue
@@ -24,6 +25,24 @@ public class OrderItem {
 
 	private int orderPrice;
 
+	public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
+		OrderItem orderItem = new OrderItem();
+		orderItem.setItem(item);
+		orderItem.setOrderPrice(orderPrice);
+		orderItem.setCount(count);
+
+		//주문을 넣은 상태이기 때문에 item의 수량 감
+		item.removeStock(count);
+		return orderItem;
+	}
+
 	private int count;
 
+	public void cancel() {
+		item.addStock(count);
+	}
+
+	public int getTotalPrice() {
+		return orderPrice * count;
+	}
 }
