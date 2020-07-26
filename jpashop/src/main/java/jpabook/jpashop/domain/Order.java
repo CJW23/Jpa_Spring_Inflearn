@@ -6,13 +6,16 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "orders")
 @Getter
 @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)		//생성자를 통한 생성 막음
 public class Order {
 
 	@Id

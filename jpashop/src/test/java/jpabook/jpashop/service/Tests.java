@@ -2,6 +2,7 @@ package jpabook.jpashop.service;
 
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.repository.MemberRepository;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,11 +53,11 @@ public class Tests {
 
         //when
         memberService.join(member1);
-        /*try{
+        try{
             memberService.join(member2);        //여기서 예외가 터진다.
         } catch (Exception e) {
             return;
-        }*/
+        }
         memberService.join(member2);
         //then
         fail("예외");     //여기 오면 안된다. 여기까지 오면 오류다

@@ -1,5 +1,7 @@
 package jpabook.jpashop.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +26,7 @@ public class OrderService {
 
 	//주문
 	@Transactional
-	public Long order(Long memberId, Long itemId, int count){
+	public Long order(Long memberId, Long itemId, int count) {
 		//엔티티 조회
 		Member member = memberRepository.findOne(memberId);
 		Item item = itemRepository.findOne(itemId);
@@ -46,5 +48,19 @@ public class OrderService {
 
 	//취소
 
-	//검색
+	@Transactional
+	public void cancelOrder(Long orderId) {
+		//주문 엔티티 조회
+		Order order = orderRepository.findOne(orderId);
+		//주문 취소 -> 비즈니스 로직이 엔티티에 있음
+		order.cancel();
+	}
+	//검 색
+
+	/*public List<Order> findOrders(OrderSearch orderSearch){
+		return orderRepository.
+	}*/
+
+	//JPA를 사용할때는 엔티티에 비즈니스 로직을 넣는 방법을 많이 사용 이런 패턴을 도메인 모델 패턴이라 한다.
+	//일반적으로 sql을 사용할 때 service에서 비즈니스 로직을 처리하는 경우를 트랜잭션 스크립트 패턴이라 한다.
 }
