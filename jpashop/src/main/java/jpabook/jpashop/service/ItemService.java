@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor        //lombok final로 잡힌 변수들 생성자를 자동으로 만들어준다.
 public class ItemService {
 
-	private ItemRepository itemRepository;
+	private final ItemRepository itemRepository;
 
 	@Transactional		//readonly면 저장이 안된다.
 	public void saveItem(Item item) {
