@@ -2,6 +2,7 @@ package jpabook.jpashop.service;
 
 import java.util.List;
 
+import jpabook.jpashop.domain.item.Book;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,11 @@ public class ItemService {
 
 	private final ItemRepository itemRepository;
 
+	@Transactional
+	public void updateItem(Long itemId, Book param) {
+		Item findItem = itemRepository.findOne(itemId);
+		findItem.setPrice(param.getPrice());
+	}
 	@Transactional		//readonly면 저장이 안된다.
 	public void saveItem(Item item) {
 		 itemRepository.save(item);

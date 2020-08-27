@@ -2,6 +2,7 @@ package jpabook.jpashop.service;
 
 import java.util.List;
 
+import jpabook.jpashop.repository.OrderSearch;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -57,9 +58,9 @@ public class OrderService {
 	}
 	//검 색
 
-	/*public List<Order> findOrders(OrderSearch orderSearch){
-		return orderRepository.
-	}*/
+	public List<Order> findOrders(OrderSearch orderSearch){
+		return orderRepository.findAll(orderSearch);
+	}
 
 	//JPA를 사용할때는 엔티티에 비즈니스 로직을 넣는 방법을 많이 사용 이런 패턴을 도메인 모델 패턴이라 한다.
 	//일반적으로 sql을 사용할 때 service에서 비즈니스 로직을 처리하는 경우를 트랜잭션 스크립트 패턴이라 한다.
