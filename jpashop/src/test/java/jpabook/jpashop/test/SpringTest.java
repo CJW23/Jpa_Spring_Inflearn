@@ -1,21 +1,30 @@
-package jpabook.jpashop;
+package jpabook.jpashop.test;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwsHeader;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 @SpringBootTest
-class JpashopApplicationTests {
+class SpringTest {
+	@Test
+	void test() {
+		Logger logger = LoggerFactory.getLogger(getClass());
+		logger.trace("trace");
+		logger.debug("debug");
+		logger.info("info");
+		logger.warn("warn");
+		logger.error("error");
+	}
 	@Test
 	void contextLoads() throws Exception{
 		String key = "A";

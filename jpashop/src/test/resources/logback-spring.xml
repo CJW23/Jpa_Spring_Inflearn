@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds">
+    <property name="LOG_PATTERN" value="%logger{0} === %msg%n"/>
+    <!-- application.yml의 source에 해당하는 값 가져옴 -->
+    <springProperty scope="context" name="LOG_LEVEL" source="logging.level.jpabook.jpashop.test"/>
+    <springProfile name="local">
+        <property name="PATH" value="./logs/test-local.log" />
+    </springProfile>
+    <springProfile name="dev">
+        <property name="PATH" value="./logs/test-dev.log" />
+    </springProfile>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%-5level %d{yy-MM-dd HH:mm:ss}[%thread] [%logger{0}:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${PATH}</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%-5level %d{yy-MM-dd HH:mm:ss}[%thread] [%logger{0}:%line] - %msg%n</pattern>
+        </encoder>
+        <!-- 로그파일을 교체하는 정책 TimeBasedRollingPolicy: 시간 단위 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 파일 이름 -->
+            <fileNamePattern>./logs/time.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- 특정 액션에 따라 파일 교체 -->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 100MB -->
+                <maxFileSize>5KB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <!-- logger: 지역, root: 전역 이라 생각하면 됨
+    <logger name="jpabook.jpashop.test" level="debug" additivity="true">
+        <appender-ref ref="CONSOLE"/>
+    </logger>-->
+    <root level="info">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>
